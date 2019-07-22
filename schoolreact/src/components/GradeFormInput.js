@@ -65,8 +65,8 @@ const GradeBox = ({name, credit, type, grade, onAddition, onChange}) => (
     <Wrapper>
         <Box>
             <Create onClick = {onAddition}>+</Create>
-            <Name placeholder = {name} onChange = {onChange}/><Credit placeholder = {credit} onChange = {onChange}/>
-            <Type placeholder = {type} onChange = {onChange}/><Grade placeholder = {grade} onChange = {onChange}/>
+            <Name placeholder = {name} onChange = {onChange} name ="name"/><Credit placeholder = {credit} onChange = {onChange} name = "credit"/>
+            <Type placeholder = {type} onChange = {onChange} name = "type"/><Grade placeholder = {grade} onChange = {onChange} name = "grade"/>
         </Box>
     </Wrapper>
 );
@@ -83,8 +83,21 @@ class GradeFormInput extends Component{
         grade: ''
     } 
 
+    state = {
+        name: '',
+        credit:'',
+        type:'',
+        grade:''
+    }
+
+    handleChange = (event) =>{
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
     handleAddition = () =>{
-        this.props.onAddition(this.props.name)
+        this.props.onAddition(this.state);
     }
 
     componentDidMount(){
@@ -95,7 +108,7 @@ class GradeFormInput extends Component{
         const {name, credit, type, grade} = this.props;
 
         return(
-            <GradeBox onAddition = {this.handleAddition} name = {name} credit ={credit} type = {type} grade = {grade}/>
+            <GradeBox onChange = {this.handleChange} onAddition = {this.handleAddition} name = {name} credit ={credit} type = {type} grade = {grade}/>
         )
     }
 }

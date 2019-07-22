@@ -17,7 +17,12 @@ class GradeFormList extends Component {
     }
 
     handleAddition = (data) =>{
-        console.log(data);
+        axios.post('/gradedata',{id:this.props.id,data})
+        .then(response => {
+            console.log(response);
+            this.componentDidMount();
+        })
+        .catch(err=> console.log(err))
     }
 
     handleRemove = (id) => {

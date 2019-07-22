@@ -66,6 +66,19 @@ app.post('/logindata', (req,res) => {
     })
 });
 
+app.post('/gradedata', (req,res) => {
+const id = req.body.id;
+const {name, credit, type, grade} = req.body.data;
+const collection = client.db("mern").collection("StudentGrade");
+collection.insertOne({'id':id,'name':name,'credit':credit,'type':type,'grade':grade})
+.then(data =>{
+    console.log(data)
+    return res.json({success:true});
+}
+)
+.catch(err => console.log(err))
+})
+
 app.get('/gradedata',(req,res) => {
     const {id} = req.query;
     console.log(id);
@@ -77,9 +90,9 @@ app.get('/gradedata',(req,res) => {
         }
         else{
             var gradeArray = [];
-            for(let i = 0; i < result.length; i++){
-                gradeArray.push({FormId: i, name: result[i].name, credit: result[i].credit,
-                            type: result[i].type, grade: result[i].grade})
+            for(let i = 0; i < data.length; i++){
+                gradeArray.push({FormId: i, name: data[i].name, credit: data[i].credit,
+                            type: data[i].type, grade: data[i].grade})
             }
             return res.json({success: true, result: gradeArray});
         }

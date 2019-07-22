@@ -20,7 +20,6 @@ class GradeFormList extends Component {
         axios.post('/gradedata',{id:this.props.id,data})
         .then(response => {
             console.log(response);
-            this.componentDidMount();
         })
         .catch(err=> console.log(err))
     }

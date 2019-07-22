@@ -31,7 +31,9 @@ connection.connect();
 const client = new MongoClient(db, {useNewUrlParser:true});
 client.connect(err=> {
     console.log("MongoDB connected.")
-    const collection = client.db("mern").collection("mern");
+    const collection = client.db("mern").collection("StudentGrade");
+    collection.deleteMany({})
+    .then(result =>console.log("Deletion Success"))
 });
 
 const port = process.env.PORT || 3001;
@@ -72,8 +74,8 @@ const {name, credit, type, grade} = req.body.data;
 const collection = client.db("mern").collection("StudentGrade");
 collection.insertOne({'id':id,'name':name,'credit':credit,'type':type,'grade':grade})
 .then(data =>{
-    console.log(data)
-    return res.json({success:true});
+    console.log(data.ops[0])
+    return res.json(data.ops[0]);
 }
 )
 .catch(err => console.log(err))

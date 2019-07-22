@@ -15,26 +15,30 @@ class GradeFormList extends Component {
         this.SelectId = data;
         console.log(this.SelectId);
     }
-
+//Add grades to the database and re-render
     handleAddition = (data) =>{
         axios.post('/gradedata',{id:this.props.id,data})
         .then(response => {
             console.log(response);
-            this.setState({
-                data: []
-            })
             this.componentDidMount();
         })
         .catch(err=> console.log(err))
     }
-
-    handleRemove = (id) => {
-        this.setState({
-            data: this.state.data.filter(info=> info.FormId !== id)
+//Remove grades
+    handleRemove = (m_Id) => {
+        axios.post('/deletegrade', {_id: m_Id})
+        .then(response =>{
+            if(response.data.success === true){
+                this.componentDidMount();
+            }
         })
+
     }
 
     componentDidMount(){
+        this.setState({
+            data: []
+        })
         console.log(this.state.id);
         axios.get('/gradedata', {
             params: {id: this.props.id}
@@ -46,7 +50,6 @@ class GradeFormList extends Component {
             } else if(response.data.success){
                 var LoadData = response.data.result;
                 for(let count = 0; count < response.data.result.length; count++){
-                    LoadData[count].FormId = count;
                     this.setState({
                         data: this.state.data.concat(LoadData[count])
                     })
@@ -56,18 +59,18 @@ class GradeFormList extends Component {
     }
 
     render(){
-        const index = {FormId : -1, name: '이름', credit: '학점', type:'수업 종류', grade: '성적'};
+        const index = {_id : -1, name: '이름', credit: '학점', type:'수업 종류', grade: '성적'};
 
         const list = this.state.data.map(
             info => {
-                return (<GradeFormButton onRemove = {this.handleRemove} onCreate = {this.handleCreate} key={info.FormId} info={info}/>);
+                return (<GradeFormButton onRemove = {this.handleRemove} onCreate = {this.handleCreate} key={info._id} info={info}/>);
             }
         );
         return(
             <HomeWrapper>
             <GradeForm FormId = {index.FormId} name = {index.name} credit = {index.credit} type = {index.type} grade= {index.grade}/>
             {list}
-            <GradeFormInput name = '' creidt = ''type = '' grade = '' onAddition = {this.handleAddition}></GradeFormInput>
+            <GradeFormInput name = '' credit = '' type = '' grade = '' onAddition = {this.handleAddition}></GradeFormInput>
             <Button onClick = {this.handleClick}>수정</Button>
             </HomeWrapper>
         );

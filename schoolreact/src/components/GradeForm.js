@@ -57,7 +57,7 @@ const GradeBox = ({name, credit, type, grade}) => (
 class GradeForm extends Component{
 
     static defaultProps = {
-        FormId: 0,
+        _id: 0,
         name: '',
         credit: '',
         type: '',

@@ -76,17 +76,17 @@ const GradeBox = ({name, credit, type, grade, onClick, onRemove}) => (
 class GradeFormButton extends Component{
 
     handleClick = (event) => {
-        this.props.onCreate(this.props.info.FormId);
+        this.props.onCreate(this.props.info._id);
     }
 
     handleRemove = () =>{
-        this.props.onRemove(this.props.info.FormId);
+        this.props.onRemove(this.props.info._id);
     }
 
 
     static defaultProps = {
         info:{
-            FormId: 0,
+            _id: 0,
             name: '',
             credit: '',
             type: '',
@@ -95,7 +95,7 @@ class GradeFormButton extends Component{
     } 
 
     componentDidMount(){
-        console.log(this.props.info.FormId);
+        console.log(this.props.info._id);
     }
 
     render(){

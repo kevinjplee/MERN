@@ -10,6 +10,7 @@ var mysql =require('mysql');
 const validator = require('validator');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
+const Mongodb = require('mongodb');
 
 const app = express();
 
@@ -31,9 +32,6 @@ connection.connect();
 const client = new MongoClient(db, {useNewUrlParser:true});
 client.connect(err=> {
     console.log("MongoDB connected.")
-    const collection = client.db("mern").collection("StudentGrade");
-    collection.deleteMany({})
-    .then(result =>console.log("Deletion Success"))
 });
 
 const port = process.env.PORT || 3001;
@@ -68,6 +66,20 @@ app.post('/logindata', (req,res) => {
     })
 });
 
+app.post('/deletegrade',(req,res)=>{
+    const {_id} = req.body;
+    const collection = client.db("mern").collection("StudentGrade");
+    collection.deleteOne({'_id': Mongodb.ObjectID(_id)})
+    .then(data => {
+        console.log("deleted");
+    return res.json({success : true});
+    })
+    .catch(err => {
+        console.log(err);
+        return res.json({success:false});
+    })
+})
+
 app.post('/gradedata', (req,res) => {
 const id = req.body.id;
 const {name, credit, type, grade} = req.body.data;
@@ -93,7 +105,7 @@ app.get('/gradedata',(req,res) => {
         else{
             var gradeArray = [];
             for(let i = 0; i < data.length; i++){
-                gradeArray.push({FormId: i, name: data[i].name, credit: data[i].credit,
+                gradeArray.push({_id: data[i]._id, name: data[i].name, credit: data[i].credit,
                             type: data[i].type, grade: data[i].grade})
             }
             return res.json({success: true, result: gradeArray});

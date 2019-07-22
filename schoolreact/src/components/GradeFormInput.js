@@ -65,8 +65,8 @@ const GradeBox = ({name, credit, type, grade, onAddition, onChange}) => (
     <Wrapper>
         <Box>
             <Create onClick = {onAddition}>+</Create>
-            <Name value = {name} onChange = {onChange} name ="name"/><Credit value = {credit} onChange = {onChange} name = "credit"/>
-            <Type value = {type} onChange = {onChange} name = "type"/><Grade value = {grade} onChange = {onChange} name = "grade"/>
+            <Name value = {name} onChange = {onChange} name ="name" placeholder ="이름"/><Credit value = {credit} onChange = {onChange} name = "credit" placeholder = "학점"/>
+            <Type value = {type} onChange = {onChange} name = "type" placeholder = "수업 종류"/><Grade value = {grade} onChange = {onChange} name = "grade" placeholder ="성적" />
         </Box>
     </Wrapper>
 );
@@ -76,7 +76,7 @@ const GradeBox = ({name, credit, type, grade, onAddition, onChange}) => (
 class GradeFormInput extends Component{
 
     static defaultProps = {
-        FormId: 0,
+        _id: 0,
         name: '',
         credit: '',
         type: '',

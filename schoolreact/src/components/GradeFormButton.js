@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import oc from 'open-color';
 
 const Wrapper = styled.div`
+margin-bottom: 1.5rem;
 & + & {
     margin-top : 1rem;
     margin-bottom: 1rem;
@@ -11,12 +12,11 @@ const Wrapper = styled.div`
 
 const Box = styled.button`
 display: flex;
-justify-content: space-between;
 width : 100%;
 border: 2px solid ${oc.gray[8]};
-line-height: 4rem;
-background: ${props => props.bg};
-font-color: ${props => props.fc};
+line-height: 3rem;
+background: white;
+
 &:active{
     background: ${oc.gray[8]};
     color: white;
@@ -32,12 +32,8 @@ opacity: 0;
 ${Box}:hover &{
     opacity:1;
 }
-
+cursor: pointer;
 `;
-Box.defaultProps = {
-    bg: "white",
-    fc: "black"
-}
 
 
 const Name = styled.div`

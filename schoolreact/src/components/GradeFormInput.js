@@ -11,70 +11,81 @@ margin-bottom: 1.5rem;
 `;
 
 const Box = styled.div`
-width : 99.5%;
+display:flex;
+width:100%;
 border: 2px solid ${oc.gray[8]};
-line-height: 4rem;
+line-height: 3rem;
 background: white;
 font-color: black;
+`;
+
+const Create = styled.div`
+font-size: 2rem;
+position:absolute;
+color: ${oc.blue[6]};
+font-weight: 600;
+opacity: 0; 
+${Box}:hover &{
+    opacity:1;
 }
+cursor: pointer;
 `;
 
 
-Box.defaultProps = {
-    bg: "white",
-    fc: "black"
-}
-
-
-const Name = styled.Input`
+const Name = styled.input`
 text-align: center;
-display:inline-block;
-width: 24%;
+flex:auto;
 font-size:1.5rem;
+line-height: 3rem;
+min-width:0;
 `;
 
-const Credit = styled.Input`
+const Credit = styled.input`
 text-align: center;
-display:inline-block;
-width: 24%;
+flex:auto;
 font-size:1.5rem;
+min-width:0;
 `; 
 
-const Type = styled.Input`
+const Type = styled.input`
 text-align: center;
-display:inline-block;
-width: 25%;
+flex:auto;
 font-size:1.5rem;
+min-width:0;
 `;
 
-const Grade= styled.Input`
+const Grade= styled.input`
 text-align: center;
-display:inline-block;
-width: 25%;
+flex:auto;
 font-size:1.5rem;
+min-width:0;
 `;
 
-const GradeBox = ({name, credit, type, grade}) => (
+const GradeBox = ({name, credit, type, grade, onAddition, onChange}) => (
     <Wrapper>
         <Box>
-            <Name>{name}</Name><Credit>{credit}</Credit>  
-            <Type>{type}</Type> <Grade>{grade}</Grade>
+            <Create onClick = {onAddition}>+</Create>
+            <Name placeholder = {name} onChange = {onChange}/><Credit placeholder = {credit} onChange = {onChange}/>
+            <Type placeholder = {type} onChange = {onChange}/><Grade placeholder = {grade} onChange = {onChange}/>
         </Box>
-        <button onClick = {this.handle}
     </Wrapper>
 );
 
 
 
-class GradeForm extends Component{
+class GradeFormInput extends Component{
 
     static defaultProps = {
         FormId: 0,
         name: '',
         credit: '',
         type: '',
-        grade: '',
+        grade: ''
     } 
+
+    handleAddition = () =>{
+        this.props.onAddition(this.props.name)
+    }
 
     componentDidMount(){
         console.log(this.props.FormId);
@@ -84,9 +95,9 @@ class GradeForm extends Component{
         const {name, credit, type, grade} = this.props;
 
         return(
-            <GradeBox name = {name} credit ={credit} type = {type} grade = {grade}/>
+            <GradeBox onAddition = {this.handleAddition} name = {name} credit ={credit} type = {type} grade = {grade}/>
         )
     }
 }
 
-export default GradeForm;
+export default GradeFormInput;

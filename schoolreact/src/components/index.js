@@ -7,3 +7,4 @@ export {default as GradeForm} from './GradeForm';
 export {default as GradeFormList} from './GradeFormList';
 export {default as HomeWrapper} from './HomeWrapper.js';
 export {default as GradeFormButton} from './GradeFormButton';
+export {default as GradeFormInput} from './GradeFormInput';

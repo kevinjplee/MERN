@@ -13,18 +13,11 @@ margin-bottom: 1.5rem;
 const Box = styled.div`
 display:flex;
 border: 2px solid ${oc.gray[8]};
-line-height: 4rem;
+line-height: 3rem;
 background: white;
 font-color: black;
 }
 `;
-
-
-Box.defaultProps = {
-    bg: "white",
-    fc: "black"
-}
-
 
 const Name = styled.div`
 text-align: center;

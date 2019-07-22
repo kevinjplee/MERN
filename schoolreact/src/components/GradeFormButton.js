@@ -10,29 +10,30 @@ const Wrapper = styled.div`
 `;
 
 const Box = styled.button`
+display: flex;
+justify-content: space-between;
 width : 100%;
 border: 2px solid ${oc.gray[8]};
 line-height: 4rem;
 background: ${props => props.bg};
 font-color: ${props => props.fc};
-&:hover{
-    background: ${oc.gray[4]};
-}
 &:active{
     background: ${oc.gray[8]};
-    font-color: white;
+    color: white;
 }
 `;
 
-const Button = styled.button`
-width:10%;
-border:2px solid black;
-line-height: 2rem;
-background:white;
-font-color: solid red;
+const Delete = styled.div`
+font-size: 2rem;
+position:absolute;
+color: ${oc.red[6]};
+font-weight: 600;
+opacity: 0; 
+${Box}:hover &{
+    opacity:1;
+}
+
 `;
-
-
 Box.defaultProps = {
     bg: "white",
     fc: "black"
@@ -41,34 +42,33 @@ Box.defaultProps = {
 
 const Name = styled.div`
 text-align: center;
-display:inline-block;
-width: 24%;
+flex: 1;
 font-size:1.5rem;
 `;
 
 const Credit = styled.div`
 text-align: center;
-display:inline-block;
-width: 24%;
+flex:1;
 font-size:1.5rem;
 `; 
 
 const Type = styled.div`
 text-align: center;
-display:inline-block;
-width: 25%;
+flex:1;
 font-size:1.5rem;
 `;
 
 const Grade= styled.div`
 text-align: center;
-display:inline-block;
-width: 25%;
+flex:1;
 font-size:1.5rem;
 `;
 
-const GradeBox = ({name, credit, type, grade, onClick}) => (
+const GradeBox = ({name, credit, type, grade, onClick, onRemove}) => (
+
+    
         <Box onClick = {onClick}>
+            <Delete onClick = {onRemove}>&times;</Delete>
             <Name>{name}</Name><Credit>{credit}</Credit>  
             <Type>{type}</Type> <Grade>{grade}</Grade>
         </Box>
@@ -86,6 +86,7 @@ class GradeFormButton extends Component{
     handleRemove = () =>{
         this.props.onRemove(this.props.FormId);
     }
+
 
     static defaultProps = {
         FormId: 0,
@@ -106,8 +107,7 @@ class GradeFormButton extends Component{
 
         return(
             <Wrapper>
-             <GradeBox onClick = {this.handleClick} name = {name} credit ={credit} type = {type} grade = {grade}/>
-             <Button onClick= {this.handleRemove}>삭제</Button>
+             <GradeBox onRemove = {this.handleRemove} onClick = {this.handleClick} name = {name} credit ={credit} type = {type} grade = {grade}/>
             </Wrapper>
         )
     }

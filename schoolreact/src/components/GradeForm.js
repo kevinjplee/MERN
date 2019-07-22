@@ -11,7 +11,7 @@ margin-bottom: 1.5rem;
 `;
 
 const Box = styled.div`
-width : 99.5%;
+display:flex;
 border: 2px solid ${oc.gray[8]};
 line-height: 4rem;
 background: white;
@@ -28,29 +28,25 @@ Box.defaultProps = {
 
 const Name = styled.div`
 text-align: center;
-display:inline-block;
-width: 24%;
+flex:1;
 font-size:1.5rem;
 `;
 
 const Credit = styled.div`
 text-align: center;
-display:inline-block;
-width: 24%;
+flex:1;
 font-size:1.5rem;
 `; 
 
 const Type = styled.div`
 text-align: center;
-display:inline-block;
-width: 25%;
+flex:1;
 font-size:1.5rem;
 `;
 
 const Grade= styled.div`
 text-align: center;
-display:inline-block;
-width: 25%;
+flex : 1;
 font-size:1.5rem;
 `;
 

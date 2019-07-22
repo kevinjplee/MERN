@@ -32,12 +32,6 @@ transition: .2s all;
 
 `;
 
-Label.defaultProps = {
-    theme: {
-        main: "white"
-    }
-}
-
 const Button = ({children, onClick}) => (
     <Label onClick = {onClick}>
         {children}

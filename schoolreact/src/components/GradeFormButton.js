@@ -80,13 +80,13 @@ class GradeFormButton extends Component{
     }
 
     handleRemove = () =>{
-        this.props.onRemove(this.props.FormId);
+        this.props.onRemove(this.props.info.FormId);
     }
 
 
     static defaultProps = {
-        FormId: 0,
         info:{
+            FormId: 0,
             name: '',
             credit: '',
             type: '',
@@ -95,7 +95,7 @@ class GradeFormButton extends Component{
     } 
 
     componentDidMount(){
-        console.log(this.props.FormId);
+        console.log(this.props.info.FormId);
     }
 
     render(){

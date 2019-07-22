@@ -20,6 +20,10 @@ class GradeFormList extends Component {
         axios.post('/gradedata',{id:this.props.id,data})
         .then(response => {
             console.log(response);
+            this.setState({
+                data: []
+            })
+            this.componentDidMount();
         })
         .catch(err=> console.log(err))
     }
@@ -40,9 +44,11 @@ class GradeFormList extends Component {
             if(!response.data.success){
                 console.log("No data in the table");
             } else if(response.data.success){
+                var LoadData = response.data.result;
                 for(let count = 0; count < response.data.result.length; count++){
+                    LoadData[count].FormId = count;
                     this.setState({
-                        data: this.state.data.concat(response.data.result[count])
+                        data: this.state.data.concat(LoadData[count])
                     })
                 }
             }

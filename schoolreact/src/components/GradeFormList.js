@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {GradeForm, Button, HomeWrapper, GradeFormButton} from 'components'
+import {GradeForm, Button, HomeWrapper, GradeFormButton, GradeFormInput} from 'components'
 import axios from 'axios'
 
 class GradeFormList extends Component {
@@ -16,6 +16,10 @@ class GradeFormList extends Component {
         console.log(this.SelectId);
     }
 
+    handleAddition = (data) =>{
+        console.log(data);
+    }
+
     handleRemove = (id) => {
         this.setState({
             data: this.state.data.filter(info=> info.FormId !== id)
@@ -24,8 +28,8 @@ class GradeFormList extends Component {
 
     componentDidMount(){
         console.log(this.state.id);
-        axios.post('/gradedata', {
-            id: this.props.id
+        axios.get('/gradedata', {
+            params: {id: this.props.id}
         })
         .then(response => {
             console.log(response);
@@ -53,7 +57,7 @@ class GradeFormList extends Component {
             <HomeWrapper>
             <GradeForm FormId = {index.FormId} name = {index.name} credit = {index.credit} type = {index.type} grade= {index.grade}/>
             {list}
-            <Button onClick = {this.handleAdd}>추가</Button>
+            <GradeFormInput name = '' creidt = ''type = '' grade = '' onAddition = {this.handleAddition}></GradeFormInput>
             <Button onClick = {this.handleClick}>수정</Button>
             </HomeWrapper>
         );

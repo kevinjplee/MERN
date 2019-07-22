@@ -31,19 +31,7 @@ connection.connect();
 const client = new MongoClient(db, {useNewUrlParser:true});
 client.connect(err=> {
     console.log("MongoDB connected.")
-    const collection =client.db("mern").collection("mern");
-
-    collection.insertMany([{a:1},{b:1},{c:1}], function (err,r){
-        collection.updateMany({a:1},{$set:{d:1}, $unset:{a:""}},{upsert:true}, function(err,r){
-            collection.deleteMany({c:1}, function(err,r){
-                collection.find({}).toArray(function(err,docs){
-                    console.log(docs);
-                    client.close();
-                });
-                
-            });
-        });
-    });
+    const collection = client.db("mern").collection("mern");
 });
 
 const port = process.env.PORT || 3001;
@@ -57,8 +45,12 @@ app.get('/', (req, res) => {
 
 app.post('/logindata', (req,res) => {
     const {id, password} = req.body;
-    connection.query('SELECT * FROM accounts WHERE `id` =?', id,function(err,rows){
-        const user = rows[0];
+    const collection = client.db("mern").collection("accounts");
+
+    collection.find({'id': id}).toArray()
+    .then(item =>{
+        console.log(item)
+        const user = item[0];
         if(!user){
             return res.json({success:false, result:"Incorrect username"});
         }
@@ -68,17 +60,19 @@ app.post('/logindata', (req,res) => {
         else if(user.password === password){
             return res.json({success:true});
         }
-    });
+    })
+    .catch(err => {
+        console.error(err)
+    })
 });
 
-app.post('/gradedata',(req,res) => {
-    const {id} = req.body;
+app.get('/gradedata',(req,res) => {
+    const {id} = req.query;
     console.log(id);
-    connection.query('SELECT * FROM studentGrade WHERE `id` = ?', id, function(err, result){
-        if(err){
-            console.log(err);
-        }
-        else if(result.length === 0){
+    const collection = client.db("mern").collection("StudentGrade");
+    collection.find({'id':id}).toArray()
+    .then(data =>{
+        if(data.length === 0){
             return res.json({success: false});
         }
         else{
@@ -90,34 +84,25 @@ app.post('/gradedata',(req,res) => {
             return res.json({success: true, result: gradeArray});
         }
     })
+    .catch(err=> console.log(err))
 })
 
 
 function checkIdDuplicate(input, callback){
-    const selectCommand = 'SELECT id from accounts where id = ?';
-    connection.query(selectCommand,input,function(err,result){
-        if(err) {
-            console.log(error);
-        return;
-    }else{
-        return callback(result.length);
-    }
+    const collection = client.db("mern").collection("accounts");
+    collection.findOne({'id':input})
+    .then(item =>{
+        if(!item){
+            return callback(0);
+        }
+        else{
+        return callback(item.length);
+        }
+    })
+    .catch(err => {
+        console.error(err)
     })
 }
-
-/*
-function checkEmailDuplicate(input, callback){
-    const selectCommand = 'SELECT email From accounts Where email = ?';
-    connection.query(selectCommand,input,function(err,result){
-        if(err) {
-            console.log(error);
-        return;
-    }else{
-        return callback(result.length);
-    }
-    })
-}
-*/
 
 app.post('/registerdata', (req,res) => {
     const {id, password, name, major, email} = req.body;
@@ -138,23 +123,15 @@ app.post('/registerdata', (req,res) => {
                 return res.json({success: false, error: "Id already exists"})
             }
             else{
-                
-            const insertCommand = 'INSERT INTO accounts (id, password, name, major, email) VALUES(?,?,?,?,?)';
-            const insertVal = [id, password, name, major, email];
-
-            connection.query(insertCommand,insertVal,function(err,rows){
-               if(err) {
-                console.log(err);
-                return;
-                }
-                else{
-                    return res.json({success:true});
-                }
-            });
+            const collection = client.db("mern").collection("accounts");
+            collection.insertOne({'id':id, 'password':password, 'name': name, 
+                                  'major':major,'email':email})
+            .then(result=> {
+                return res.json({success:true});
+            })
+            .catch(err=> console.log(err))
         }
-    });
-
-    }
+    });}
 });
 
 app.listen(port, () => console.log(`Listening on Port ${port}`));

@@ -11,6 +11,7 @@ margin-bottom: 1.5rem;
 `;
 
 const Box = styled.div`
+border-radius:5px;
 display:flex;
 width:100%;
 border: 2px solid ${oc.gray[8]};
@@ -105,7 +106,7 @@ class GradeFormInput extends Component{
         grade:''
         })
     }
-    
+
     render(){
         const {name, credit, type, grade} = this.props;
 

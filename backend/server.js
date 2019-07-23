@@ -6,35 +6,22 @@ var session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const logger = require('morgan');
-var mysql =require('mysql');
 const validator = require('validator');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const Mongodb = require('mongodb');
-
+const socket = require('socket.io');
 const app = express();
-
-
+const port = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const db = require("./config/keys").mongoURI;
 
-var connection = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : '1234',
-    database : 'school'
-});
-
-connection.connect();
-
 const client = new MongoClient(db, {useNewUrlParser:true});
 client.connect(err=> {
     console.log("MongoDB connected.")
 });
-
-const port = process.env.PORT || 3001;
 
 app.use(logger('dev'));
 
@@ -161,4 +148,14 @@ app.post('/registerdata', (req,res) => {
     });}
 });
 
-app.listen(port, () => console.log(`Listening on Port ${port}`));
+server = app.listen(port, () => console.log(`Listening on Port ${port}`));
+
+io = socket(server);
+
+io.on('connection', (socket) =>{
+    console.log(socket.id);
+
+    socket.on('SEND_MESSAGE', function(data){
+        io.emit('RECEIVE_MESSAGE', data);
+    })
+});

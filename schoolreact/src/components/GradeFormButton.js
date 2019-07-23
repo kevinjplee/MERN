@@ -11,6 +11,7 @@ margin-bottom: 1.5rem;
 `;
 
 const Box = styled.button`
+border-radius: 5px;
 display: flex;
 width : 100%;
 border: 2px solid ${oc.gray[8]};

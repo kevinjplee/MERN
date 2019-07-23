@@ -105,11 +105,7 @@ class GradeFormInput extends Component{
         grade:''
         })
     }
-
-    componentDidMount(){
-        console.log(this.props.FormId);
-    }
-
+    
     render(){
         const {name, credit, type, grade} = this.props;
 

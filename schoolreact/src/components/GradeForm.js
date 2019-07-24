@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import oc from 'open-color';
 
 const Wrapper = styled.div`
-margin-bottom: 1.5rem;
+margin-bottom: 1rem;
 & + & {
     margin-top : 1.5rem;
     margin-bottom: 1.5rem;
@@ -23,18 +23,21 @@ const Name = styled.div`
 text-align: center;
 flex:1;
 font-size:1.5rem;
+border-right: 2px solid black;
 `;
 
 const Credit = styled.div`
 text-align: center;
 flex:1;
 font-size:1.5rem;
+border-right: 2px solid black;
 `; 
 
 const Type = styled.div`
 text-align: center;
 flex:1;
 font-size:1.5rem;
+border-right: 2px solid black;
 `;
 
 const Grade= styled.div`

@@ -67,11 +67,10 @@ class GradeFormList extends Component {
             }
         );
         return(
-            <HomeWrapper>
+            <HomeWrapper label = "학점관리">
             <GradeForm FormId = {index.FormId} name = {index.name} credit = {index.credit} type = {index.type} grade= {index.grade}/>
             {list}
             <GradeFormInput name = '' credit = '' type = '' grade = '' onAddition = {this.handleAddition}></GradeFormInput>
-            <Button onClick = {this.handleClick}>수정</Button>
             </HomeWrapper>
         );
     }

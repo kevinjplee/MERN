@@ -101,6 +101,25 @@ app.get('/gradedata',(req,res) => {
     .catch(err=> console.log(err))
 })
 
+app.post('/modifygrade', (req,res)=>{
+    console.log(req.body);
+    const{ismodify, _id, name, credit, type, grade} = req.body;
+    const collection = client.db("mern").collection("StudentGrade");
+    collection.findOneAndUpdate({'_id': Mongodb.ObjectID(_id)},{$set:{'name':name,
+    'credit':credit,'type':type,'grade':grade}})
+    .then(data =>{
+        console.log(data);
+        if(data){
+            return res.json({success: true});
+        }
+        else{
+            return res.json({success:false});
+        }
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+})
 
 function checkIdDuplicate(input, callback){
     const collection = client.db("mern").collection("accounts");

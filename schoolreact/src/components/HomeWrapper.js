@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 
+const Background = styled.div`
+background-color : #f9f9f9;
+width:100%;
+height:100%;
+`;
 
 const Positioner = styled.div`
 position : absolute;
@@ -23,13 +28,14 @@ height: auto;
 
 const Label = styled.div`
 position : absolute;
-top: -8%;
+top: -10%;
 
 font-size: 1.5rem;
-color: ${oc.gray[7]};
+color: ${oc.gray[8]};
 `;
 
 const HomeWrapper = ({label, children}) => (
+    <Background>
     <Positioner>
         <Label>{label}</Label>
         <Box>
@@ -38,6 +44,7 @@ const HomeWrapper = ({label, children}) => (
             </Contents>
         </Box>
     </Positioner>
+    </Background>
 );
 
 export default HomeWrapper;

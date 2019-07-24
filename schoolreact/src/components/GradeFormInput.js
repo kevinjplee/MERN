@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import oc from 'open-color';
 
 const Wrapper = styled.div`
-margin-bottom: 1.5rem;
 & + & {
     margin-top : 1.5rem;
     margin-bottom: 1.5rem;

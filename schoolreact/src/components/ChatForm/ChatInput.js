@@ -4,17 +4,15 @@ import styled from 'styled-components';
 
 
 const Wrapper = styled.div`
-border: 2px solid black;
 border-radius: 3px;
-background: ${oc.cyan[3]};
 display:flex;
 `;
 
 const InputBox = styled.input`
+border-top: 2px solid black;
 flex:1;
 line-height : 40px;
 font-size : 15px;
-border: 2px solid ${oc.cyan[3]};
 border-radius:2px;
 color: ${oc.gray[8]};
 overflow:auto;
@@ -24,8 +22,9 @@ const SubmitBox = styled.div`
 flex:0;
 cursor: pointer;
 font-weight:600;
+background:${oc.cyan[2]};
 &:active{
-    background:${oc.cyan[5]};
+    background:${oc.cyan[3]};
     font-color: papayawhip;
 }
 

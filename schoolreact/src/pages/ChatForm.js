@@ -3,8 +3,8 @@ import {ChatFormWrapper, ChatInput, ChatMessage} from 'components/ChatForm'
 import io from "socket.io-client";
 
 class ChatForm extends Component{
-constructor(){
-    super();
+constructor(props){
+    super(props);
 
     this.socket = io('localhost:3001');
     this.socket.on('RECEIVE_MESSAGE', function(data){
@@ -21,12 +21,15 @@ constructor(){
     username: this.props.id,
     message: '',
     messages: []
-};
-handleSendMessage = (m) => {
-    this.setState({message: m})
+}
+
+handleSendMessage = (data) => {
+    console.log(data);
+    this.setState({mesasge: data})
+    console.log(this.state.message);
     this.socket.emit('SEND_MESSAGE',{
         author: this.state.username,
-        message: this.state.message
+        message: data
     });
     this.setState({message:''});
 }   

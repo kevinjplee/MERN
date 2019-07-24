@@ -12,11 +12,12 @@ display:flex;
 
 const InputBox = styled.input`
 flex:1;
-line-height : 20px;
+line-height : 40px;
 font-size : 15px;
 border: 2px solid ${oc.cyan[3]};
 border-radius:2px;
 color: ${oc.gray[8]};
+overflow:auto;
 `;
 
 const SubmitBox = styled.div`
@@ -41,8 +42,15 @@ class ChatInput extends Component{
         })
     }
 
+    handleKeyDown = (event) =>{
+        if(event.key === 'Enter'){
+            this.handleSubmit(event);
+        }
+    }
+
     handleSubmit = (event) =>{
         event.preventDefault();
+        console.log(this.state.message);
         this.props.onSendMessage(this.state.message);
         this.setState({message:''});
     }
@@ -50,7 +58,7 @@ class ChatInput extends Component{
     render(){
         return(
             <Wrapper>
-                <InputBox name = "message" onChange = {this.handleChange} value = {this.state.message}/>
+                <InputBox name = "message" onKeyDown = {this.handleKeyDown} onChange = {this.handleChange} value = {this.state.message}/>
                 <SubmitBox onClick = {this.handleSubmit}>↗</SubmitBox>
             </Wrapper>
         )

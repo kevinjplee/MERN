@@ -8,6 +8,10 @@ class Home extends Component{
 		id: this.props.location.state.id
 	}
 
+	static defaultProps ={
+		id: ''
+	}
+
 	componentDidMount(){
 		console.log(this.state.id);
 	}

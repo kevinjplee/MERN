@@ -7,7 +7,8 @@ border-radius:2px;
 flex-direction: column;
 border: 2px solid black;
 border-bottom:0.1;
-height : 450px;
+height : 850px;
+overflow:auto;
 `;
 
 const MessageBox = styled.div`
@@ -20,7 +21,7 @@ border:2px solid ${oc.cyan[5]};
 border-radius:10px;
 line-height: auto;
 font-size: 1.25rem;
-width: 180px;
+width: 240px;
 padding-left: 3px;
 `;
 

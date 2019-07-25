@@ -9,8 +9,8 @@ display:flex;
 `;
 
 const InputBox = styled.input`
-border-top: 2px solid black;
-flex:1;
+border-top: 2px solid gray;
+flex:9;
 line-height : 40px;
 font-size : 15px;
 border-radius:2px;
@@ -19,7 +19,8 @@ overflow:auto;
 `;
 
 const SubmitBox = styled.div`
-flex:0;
+text-align: center;
+flex:1;
 cursor: pointer;
 font-weight:600;
 background:${oc.cyan[2]};

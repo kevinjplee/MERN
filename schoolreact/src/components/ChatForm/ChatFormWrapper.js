@@ -13,7 +13,7 @@ height:100%;
 width:300px;
 display:flex;
 flex-direction: column;
-border: 4px solid black;
+border: 2px solid gray;
 border-radius: 5px;
 `;
 

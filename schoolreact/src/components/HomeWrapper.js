@@ -27,7 +27,6 @@ height: auto;
 `;
 
 const Label = styled.div`
-position : absolute;
 top: -10%;
 
 font-size: 1.5rem;

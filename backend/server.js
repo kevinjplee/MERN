@@ -74,7 +74,7 @@ const collection = client.db("mern").collection("StudentGrade");
 collection.insertOne({'id':id,'name':name,'credit':credit,'type':type,'grade':grade})
 .then(data =>{
     console.log(data.ops[0])
-    return res.json(data.ops[0]);
+    return res.json({success: true, data: data.ops[0]});
 }
 )
 .catch(err => console.log(err))

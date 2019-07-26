@@ -1,7 +1,7 @@
 ﻿// JavaScript source code
 import React, {Component} from 'react'
 import axios from 'axios'
-import {InputWithLabel, Submit, Wrapper, LinkButton} from 'components'
+import {Submit, Wrapper, LinkButton} from 'components'
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 

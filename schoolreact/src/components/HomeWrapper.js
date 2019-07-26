@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import oc from 'open-color';
 import Typography from '@material-ui/core/Typography'
 
 const Background = styled.div`
@@ -30,7 +29,7 @@ const HomeWrapper = ({label, children}) => (
     <Background>
     <Positioner>
         <Box>
-        <Typography component = "h1" variant = "h5" align = "center" gutterBottom = "true">학점 관리</Typography>
+        <Typography component = "h1" variant = "h5" align = "center" gutterBottom>학점 관리</Typography>
             <Contents>
                 {children}
             </Contents>

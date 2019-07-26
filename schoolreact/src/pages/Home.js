@@ -1,8 +1,7 @@
 ﻿// JavaScript source code
 import React, {Component} from 'react';
-import {GradeFormList} from 'components';
+import {GradeFormList, GradeListMUI} from 'components';
 import {ChatForm} from 'pages';
-
 class Home extends Component{
 	state = {
 		id: this.props.location.state.id
@@ -16,6 +15,7 @@ class Home extends Component{
 		return(
 			<React.Fragment>
 				<GradeFormList id = {this.state.id}></GradeFormList>
+				
 				<ChatForm id = {this.state.id}></ChatForm>
 			</React.Fragment>
 		)

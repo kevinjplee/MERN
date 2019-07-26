@@ -1,54 +1,23 @@
 import React from 'react';
-import oc from 'open-color';
-import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {styled} from '@material-ui/styles';
+import Button from '@material-ui/core/Button' 
 
-const Label = styled.button`
+const LButton = styled(Button)({
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 3,
+    color: 'white',
+    padding: '0 30px',
+    height: 48,
+    cursor: 'pointer',
+    fontSize: '1.25rem',
+    marginTop: '20px'
+})
 
-width: 100%;
-margin-top: 1rem;
-padding-top: 0.5rem;
-padding-bottom: 0.5rem;
-margin-bottom :1rem;
 
-text-align: center;
-background: ${oc.cyan[7]};
-
-cursor: pointer;
-user-select: none;
-transition: .2s all;
-
-&:hover {
-    background: ${oc.cyan[5]};
-}
-
-&:active{
-    background: ${oc.cyan[8]};
-}
-
-letter-spacing: 6px;
-text-decoration:none;
-font-size: 1.25rem;
-color: white;
-font-weight: 500;
-display:block;
-
-`;
-
-const RedLink = styled(Link)`
-
-    letter-spacing: 8px;
-    text-decoration:none;
-    font-size: 1.25rem;
-    color: white;
-    font-weight: 500;
-
-`;
-
-const LinkButton = ({children, destination, state}) => (
-    <Label as ="a" href={destination}>
+const LinkButton = ({children, destination, ...rest}) => (
+    <LButton as ="a" href={destination} {...rest}>
        {children}
-    </Label>
+    </LButton>
 );
 
 export default LinkButton;

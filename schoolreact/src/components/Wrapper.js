@@ -12,7 +12,6 @@ transform: translate(-50%, -50%);
 
 const Box = styled.div`
 width: 500px;
-border: 2px solid gray;
 `;
 
 const Contents = styled.div`
@@ -22,9 +21,7 @@ height: auto;
 `;
 
 const Label = styled.div`
-position : absolute;
-top: -8%;
-
+text-align:center;
 font-size: 1.5rem;
 color: ${oc.gray[7]};
 `;

@@ -1,7 +1,9 @@
 ﻿// JavaScript source code
 import React, {Component} from 'react'
 import axios from 'axios'
-import {InputWithLabel, Button, Wrapper, LinkButton} from 'components'
+import {InputWithLabel, Submit, Wrapper, LinkButton} from 'components'
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 class LoginForm extends Component{
 	state = {
@@ -47,12 +49,38 @@ class LoginForm extends Component{
 
 	render(){
 		return(
-			<Wrapper label = "로그인">
-				<InputWithLabel label="아이디" name ="id" placeholder ="아이디" value = {this.state.id} onChange={this.handleChange}/>
-				<InputWithLabel label="비밀번호" name ="password" placeholder ="비밀번호" value = {this.state.password} onChange={this.handleChange}/>
+			<Wrapper>
+				<Typography component = "h4" variant = "h5" align = "center" gutterBottom = "true"> 
+					로그인</Typography>
+				<TextField
+				variant = "outlined"
+				margin = "normal"
+				required
+				fullWidth
+				label ="아이디"
+				name = "id"
+				value = {this.state.id}
+				onChange={this.handleChange}
+				autoComplete = "id"
+				autofocus
+				/>
+				<TextField
+				variant = "outlined"
+				margin = "normal"
+				required
+				fullWidth
+				label ="비밀번호"
+				name = "password"
+				value = {this.state.password}
+				onChange={this.handleChange}
+				autoComplete = "password"
+				autofocus
+				/>
 			
-				<Button  onClick = {this.handleSubmit}>로그인</Button>
-				<LinkButton destination ="/register"> 회원가입</LinkButton>
+				<Submit onClick = {this.handleSubmit} fullWidth variant = "contained">
+					로그인</Submit>
+				<LinkButton destination ="/register" fullWidth variant = "contained"> 
+				회원가입</LinkButton>
 			</Wrapper>
 		);
 		}

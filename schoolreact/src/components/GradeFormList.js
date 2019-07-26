@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {GradeForm, Button, HomeWrapper, GradeFormButton, GradeFormInput} from 'components'
+import {GradeForm, HomeWrapper, GradeFormButton, GradeFormInput, GradeListMUI} from 'components'
 import axios from 'axios'
 
 class GradeFormList extends Component {
@@ -68,6 +68,7 @@ class GradeFormList extends Component {
         );
         return(
             <HomeWrapper label = "학점관리">
+            <GradeListMUI id = {this.state.id}/>
             <GradeForm FormId = {index.FormId} name = {index.name} credit = {index.credit} type = {index.type} grade= {index.grade}/>
             {list}
             <GradeFormInput name = '' credit = '' type = '' grade = '' onAddition = {this.handleAddition}></GradeFormInput>

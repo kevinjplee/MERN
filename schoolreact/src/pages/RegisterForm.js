@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {InputWithLabel, Button, Wrapper, ErrorText, LinkButton} from 'components';
+import {InputWithLabel, Submit, Wrapper, ErrorText, LinkButton} from 'components';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 
 class RegisterForm extends Component{
@@ -50,15 +52,72 @@ class RegisterForm extends Component{
 
     render(){
         return(
-            <Wrapper label = "회원가입">
-				<InputWithLabel label="아이디" name ="id" placeholder ="아이디" value = {this.state.id} onChange={this.handleChange}/>
-				<InputWithLabel label="비밀번호" name ="password" placeholder ="비밀번호" value = {this.state.password} onChange={this.handleChange}/>
-                <InputWithLabel label="이름" name ="name" placeholder ="이름" value = {this.state.name} onChange={this.handleChange}/>
-                <InputWithLabel label="전공" name ="major" placeholder ="전공" value = {this.state.major} onChange={this.handleChange}/>
-                <InputWithLabel label="이메일" name ="email" placeholder ="이메일" value = {this.state.email} onChange={this.handleChange}/>
+            <Wrapper>
+                <Typography component = "h4" variant = "h5" align = "center" gutterBottom = "true">
+					회원가입</Typography>
+                <TextField
+				variant = "outlined"
+				margin = "normal"
+				required
+				fullWidth
+				label ="아이디"
+				name = "id"
+				value = {this.state.id}
+				onChange={this.handleChange}
+				autoComplete = "id"
+				autofocus
+				/>
+				<TextField
+				variant = "outlined"
+				margin = "normal"
+				required
+				fullWidth
+				label ="비밀번호"
+				name = "password"
+				value = {this.state.password}
+				onChange={this.handleChange}
+				autoComplete = "password"
+				autofocus
+				/>
+                <TextField
+				variant = "outlined"
+				margin = "normal"
+				required
+				fullWidth
+				label ="이름"
+				name = "name"
+				value = {this.state.name}
+				onChange={this.handleChange}
+				autoComplete = "name"
+				autofocus
+				/>
+                <TextField
+				variant = "outlined"
+				margin = "normal"
+				required
+				fullWidth
+				label ="전공"
+				name = "major"
+				value = {this.state.major}
+				onChange={this.handleChange}
+				autoComplete = "major"
+				autofocus
+				/>
+                <TextField
+				variant = "outlined"
+				margin = "normal"
+				required
+				fullWidth
+				label ="이메일"
+				name = "email"
+				value = {this.state.email}
+				onChange={this.handleChange}
+				autoComplete = "email"
+				autofocus
+				/>
                 <ErrorText>{this.state.error}</ErrorText>
-				<Button onClick = {this.handleSubmit}>회원가입하기</Button>
-                <LinkButton destination ="/"> 로그인화면 </LinkButton>
+				<Submit onClick = {this.handleSubmit} fullWidth variant = "contained">회원가입하기</Submit>
+                <LinkButton destination ="/" fullWidth variant = "contained"> 로그인화면 </LinkButton>
 			</Wrapper>
         );
     }

@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
+import Typography from '@material-ui/core/Typography'
 
 const Background = styled.div`
-background-color : #f9f9f9;
+background-color:#f9f9f9;
 width:100%;
 height:100%;
 `;
@@ -17,7 +18,6 @@ transform: translate(-50%, -50%);
 
 const Box = styled.div`
 width: 800px;
-border: 2px solid gray;
 `;
 
 const Contents = styled.div`
@@ -26,18 +26,11 @@ padding: 2rem;
 height: auto;
 `;
 
-const Label = styled.div`
-top: -10%;
-
-font-size: 1.5rem;
-color: ${oc.gray[8]};
-`;
-
 const HomeWrapper = ({label, children}) => (
     <Background>
     <Positioner>
-        <Label>{label}</Label>
         <Box>
+        <Typography component = "h1" variant = "h5" align = "center" gutterBottom = "true">학점 관리</Typography>
             <Contents>
                 {children}
             </Contents>

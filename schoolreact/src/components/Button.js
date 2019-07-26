@@ -1,8 +1,18 @@
 import React from 'react';
-import oc from 'open-color';
-import styled from 'styled-components';
+import Button from '@material-ui/core/Button'
+import {styled } from '@material-ui/styles';
 
-const Label = styled.div`
+const SubmitButton = styled(Button)({
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 3,
+    color: 'white',
+    padding: '0 30px',
+    height: 48,
+    cursor: 'pointer',
+    fontSize: '1.25rem',
+    marginTop: '20px'
+})
+/*const Label = styled.div`
 
 width: 100%;
 margin-top: 1rem;
@@ -31,11 +41,11 @@ transition: .2s all;
 }
 
 `;
-
-const Button = ({children, onClick}) => (
-    <Label onClick = {onClick}>
+*/
+const Submit = ({children, ...rest}) => (
+    <SubmitButton {...rest}>
         {children}
-    </Label>
+    </SubmitButton>
 );
 
-export default Button;
+export default Submit;

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {HomeWrapper} from 'components'
 import axios from 'axios'
 import MaterialTable from 'material-table'
-
 class GradeFormList extends Component {
 
     

@@ -50,7 +50,7 @@ class LoginForm extends Component{
 	render(){
 		return(
 			<Wrapper>
-				<Typography component = "h4" variant = "h5" align = "center" gutterBottom = "true"> 
+				<Typography component = "h4" variant = "h5" align = "center" gutterBottom> 
 					로그인</Typography>
 				<TextField
 				variant = "outlined"
@@ -62,7 +62,7 @@ class LoginForm extends Component{
 				value = {this.state.id}
 				onChange={this.handleChange}
 				autoComplete = "id"
-				autofocus
+				autoFocus
 				/>
 				<TextField
 				variant = "outlined"
@@ -74,7 +74,7 @@ class LoginForm extends Component{
 				value = {this.state.password}
 				onChange={this.handleChange}
 				autoComplete = "password"
-				autofocus
+				autoFocus
 				/>
 			
 				<Submit onClick = {this.handleSubmit} fullWidth variant = "contained">

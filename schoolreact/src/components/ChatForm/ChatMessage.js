@@ -2,11 +2,17 @@ import React, {Component} from 'react'
 import styled from 'styled-components'
 import oc from 'open-color'
 
+const Wrapper = styled.div`
+flex:1;
+`;
+
 const Box = styled.div`
 border-radius:2px;
 flex-direction: column;
 border-bottom:0.1;
-height : 850px;
+min-height:90vh;
+max-height:93.5vh;
+height: 93.5vh;
 overflow:auto;
 background: ${oc.pink[0]};
 `;
@@ -56,9 +62,11 @@ renderMessage(m){
     render(){
         const {messages} = this.props;
         return(
+            <Wrapper>
             <Box>
                 {messages.map(m=> this.renderMessage(m))}
             </Box>
+            </Wrapper>
         );
     }
 }

@@ -15,7 +15,7 @@ class Home extends Component{
 		return(
 			<React.Fragment>
 				<GradeFormList id = {this.state.id}></GradeFormList>
-				<ChatForm id = {this.state.id}></ChatForm>
+				{/*<ChatForm id = {this.state.id}></ChatForm>*/}
 			</React.Fragment>
 		)
 	}

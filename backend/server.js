@@ -1,13 +1,9 @@
 // JavaScript source code
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
 var session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const logger = require('morgan');
 const validator = require('validator');
-const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const Mongodb = require('mongodb');
 const socket = require('socket.io');
@@ -103,7 +99,7 @@ app.get('/gradedata',(req,res) => {
 
 app.post('/modifygrade', (req,res)=>{
     console.log(req.body);
-    const{ismodify, _id, name, credit, type, grade} = req.body;
+    const{_id, name, credit, type, grade} = req.body;
     const collection = client.db("mern").collection("StudentGrade");
     collection.findOneAndUpdate({'_id': Mongodb.ObjectID(_id)},{$set:{'name':name,
     'credit':credit,'type':type,'grade':grade}})

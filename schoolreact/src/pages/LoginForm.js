@@ -48,6 +48,7 @@ class LoginForm extends Component{
 	}
 
 	render(){
+		console.log('Login Rendering')
 		return(
 			<Wrapper>
 				<Typography component = "h4" variant = "h5" align = "center" gutterBottom> 

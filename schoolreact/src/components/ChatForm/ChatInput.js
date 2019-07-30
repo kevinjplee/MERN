@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import oc from 'open-color';
 import styled from 'styled-components';
-
+import SendIcon from '@material-ui/icons/Send';
+import TextField from '@material-ui/core/TextField';
 
 const Wrapper = styled.div`
 border-radius: 3px;
@@ -11,7 +12,7 @@ display:flex;
 const InputBox = styled.input`
 border-top: 2px solid gray;
 flex:9;
-line-height : 40px;
+line-height : 30px;
 font-size : 15px;
 border-radius:2px;
 color: ${oc.gray[8]};
@@ -23,11 +24,12 @@ text-align: center;
 flex:1;
 cursor: pointer;
 font-weight:600;
-background:${oc.cyan[2]};
 &:active{
-    background:${oc.cyan[3]};
+    background:${oc.gray[5]};
     font-color: papayawhip;
 }
+padding-left: 2px;
+padding-right: 2px;
 
 `;
 
@@ -58,8 +60,8 @@ class ChatInput extends Component{
     render(){
         return(
             <Wrapper>
-                <InputBox name = "message" onKeyDown = {this.handleKeyDown} onChange = {this.handleChange} value = {this.state.message}/>
-                <SubmitBox onClick = {this.handleSubmit}>↗</SubmitBox>
+                <TextField rowsMax = {3} rows = {1} multiline = {true} name = "message" onKeyDown = {this.handleKeyDown} onChange = {this.handleChange} value = {this.state.message} marign = "normal" variant = "outlined" fullWidth />
+                <SubmitBox onClick = {this.handleSubmit}><SendIcon/></SubmitBox>
             </Wrapper>
         )
     }

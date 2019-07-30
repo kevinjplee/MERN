@@ -4,12 +4,11 @@ import styled from 'styled-components';
 const Positioner = styled.div`
 position:absolute;
 
-right:3%;
-bottom:3%;
+right:0;
 `;
 
 const Box = styled.div`
-height:100%;
+min-height:99.5vh;
 width:300px;
 display:flex;
 flex-direction: column;

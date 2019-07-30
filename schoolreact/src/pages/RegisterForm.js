@@ -65,7 +65,7 @@ class RegisterForm extends Component{
 				value = {this.state.id}
 				onChange={this.handleChange}
 				autoComplete = "id"
-				autoFocus = {true}
+				autoFocus
 				/>
 				<TextField
 				variant = "outlined"
@@ -77,7 +77,6 @@ class RegisterForm extends Component{
 				value = {this.state.password}
 				onChange={this.handleChange}
 				autoComplete = "password"
-				autoFocus
 				/>
                 <TextField
 				variant = "outlined"
@@ -89,7 +88,6 @@ class RegisterForm extends Component{
 				value = {this.state.name}
 				onChange={this.handleChange}
 				autoComplete = "name"
-				autoFocus = {true}
 				/>
                 <TextField
 				variant = "outlined"
@@ -101,7 +99,6 @@ class RegisterForm extends Component{
 				value = {this.state.major}
 				onChange={this.handleChange}
 				autoComplete = "major"
-				autoFocus = {true}
 				/>
                 <TextField
 				variant = "outlined"
@@ -113,7 +110,6 @@ class RegisterForm extends Component{
 				value = {this.state.email}
 				onChange={this.handleChange}
 				autoComplete = "email"
-				autoFocus = {true}
 				/>
                 <ErrorText>{this.state.error}</ErrorText>
 				<Submit onClick = {this.handleSubmit} fullWidth variant = "contained">회원가입하기</Submit>

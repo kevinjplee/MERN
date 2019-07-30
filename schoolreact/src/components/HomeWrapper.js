@@ -16,7 +16,7 @@ transform: translate(-50%, -50%);
 `;
 
 const Box = styled.div`
-width: 800px;
+width: 1000px;
 `;
 
 const Contents = styled.div`

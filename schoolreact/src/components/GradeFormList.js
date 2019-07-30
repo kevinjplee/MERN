@@ -59,6 +59,10 @@ class GradeFormList extends Component {
                             data.push(newData);
                             this.setState({ ...this.state, data });
                         }
+                        else{
+                          resolve();
+                          console.log("not a valid input")
+                        }
                     })
                     .catch(err=> console.log(err))
                   }, 600);

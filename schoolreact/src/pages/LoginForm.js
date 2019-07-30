@@ -1,14 +1,15 @@
 ﻿// JavaScript source code
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Submit, Wrapper, LinkButton} from 'components'
+import {Submit, Wrapper, LinkButton, ErrorText} from 'components'
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 class LoginForm extends Component{
 	state = {
 		id: '',
-		password: ''
+		password: '',
+		result:''
 	}
 
 	handleChange = (info) => {
@@ -38,7 +39,8 @@ class LoginForm extends Component{
 					console.log(response.data.result);
 					this.setState({
 									id:'',
-									password:''
+									password:'',
+									result:response.data.result
 		})
 				}
 				}).catch(error => {
@@ -75,9 +77,9 @@ class LoginForm extends Component{
 				value = {this.state.password}
 				onChange={this.handleChange}
 				autoComplete = "password"
-				autoFocus
+				type = "password"
 				/>
-			
+				<ErrorText>{this.state.result}</ErrorText>
 				<Submit onClick = {this.handleSubmit} fullWidth variant = "contained">
 					로그인</Submit>
 				<LinkButton destination ="/register" fullWidth variant = "contained"> 

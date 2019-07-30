@@ -9,6 +9,10 @@ const Mongodb = require('mongodb');
 const socket = require('socket.io');
 const app = express();
 const port = process.env.PORT || 3001;
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("./config/keys");
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -35,13 +39,34 @@ app.post('/logindata', (req,res) => {
         console.log(item)
         const user = item[0];
         if(!user){
-            return res.json({success:false, result:"Incorrect username"});
+            return res.json({success:false, result:"존재하지 않는 아이디입니다."});
         }
-        else if(user.password !== password){
-            return res.json({success:false, result:"Incorrect password"});
-        }
-        else if(user.password === password){
-            return res.json({success:true});
+        else {
+            bcrypt.compare(password, user.password)
+            .then(isMatch =>{
+                if(isMatch){
+                    const payload = {
+                        id: user.id,
+                        name: user.name
+                    };
+
+                    jwt.sign(
+                        payload,
+                        keys.secretOrKey,
+                        {
+                            expiresIn: 31556826
+                        },
+                        (err,token) => {
+                            res.json({
+                                success:true,
+                                token:"Bearer " + token
+                            });
+                        }
+                    );
+                } else {
+                    res.json({success:false, result: "비밀번호를 다시 입력해주세요."});
+                }
+            })
         }
     })
     .catch(err => {
@@ -63,7 +88,18 @@ app.post('/deletegrade',(req,res)=>{
     })
 })
 
+function checkEmpty(input, name, callback){
+    if(validator.isEmpty(input)){
+        return callback({success: false, error: '${name} is Empty'})
+    }
+}
+
 app.post('/gradedata', (req,res) => {
+    console.log(req.body.data);
+if(req.body.data === null){
+    return res.json({success:false});
+}
+else{
 const id = req.body.id;
 const {name, credit, type, grade} = req.body.data;
 const collection = client.db("mern").collection("StudentGrade");
@@ -73,7 +109,7 @@ collection.insertOne({'id':id,'name':name,'credit':credit,'type':type,'grade':gr
     return res.json({success: true, data: data.ops[0]});
 }
 )
-.catch(err => console.log(err))
+.catch(err => console.log(err))}
 })
 
 app.get('/gradedata',(req,res) => {
@@ -152,13 +188,20 @@ app.post('/registerdata', (req,res) => {
                 return res.json({success: false, error: "Id already exists"})
             }
             else{
-            const collection = client.db("mern").collection("accounts");
-            collection.insertOne({'id':id, 'password':password, 'name': name, 
-                                  'major':major,'email':email})
-            .then(result=> {
-                return res.json({success:true});
+            bcrypt.genSalt(10, (err,salt) =>{
+                bcrypt.hash(password, salt, (err, hash) => {
+                    if (err) console.log(err)
+                    console.log(hash);
+                    const collection = client.db("mern").collection("accounts");
+                    collection.insertOne({'id':id, 'password':hash, 'name': name, 
+                                          'major':major,'email':email})
+                    .then(result=> {
+                        return res.json({success:true});
+                    })
+                    .catch(err=> console.log(err))      
+                })
             })
-            .catch(err=> console.log(err))
+            
         }
     });}
 });

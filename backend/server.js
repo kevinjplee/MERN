@@ -12,6 +12,10 @@ const port = process.env.PORT || 3001;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("./config/keys");
+const passport = require("passport");
+
+app.use(passport.initialize());
+require("./validation/passport")(passport);
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -87,13 +91,13 @@ app.post('/deletegrade',(req,res)=>{
         return res.json({success:false});
     })
 })
-
+/*
 function checkEmpty(input, name, callback){
     if(validator.isEmpty(input)){
         return callback({success: false, error: '${name} is Empty'})
     }
 }
-
+*/
 app.post('/gradedata', (req,res) => {
     console.log(req.body.data);
 if(req.body.data === null){

@@ -3,6 +3,9 @@ import axios from 'axios';
 import {Submit, Wrapper, ErrorText, LinkButton} from 'components';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as authActions from 'modules/authModule'
 
 
 class RegisterForm extends Component{
@@ -14,6 +17,15 @@ class RegisterForm extends Component{
         email : '',
         error : '',
         }
+
+		componentDidMount(){
+			console.log(this.props.auth.isAuthenticated);
+			if(this.props.auth.isAuthenticated){
+				this.props.history.push({
+					pathname: '/home'
+				});
+			}
+		}
 
         handleChange = (info) => {
             this.setState({
@@ -119,4 +131,11 @@ class RegisterForm extends Component{
     }
 }
 
-export default RegisterForm;
+export default connect(
+	(state) => ({
+		auth: state.auth
+	}),
+	(dispatch) => ({
+		AuthActions: bindActionCreators(authActions, dispatch)
+	})
+)(RegisterForm);

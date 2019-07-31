@@ -4,12 +4,33 @@ import axios from 'axios'
 import {Submit, Wrapper, LinkButton, ErrorText} from 'components'
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import setAuthToken from "utils/setAuthToken"
+import jwt_decode from "jwt-decode";
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as authActions from 'modules/authModule'
 
 class LoginForm extends Component{
 	state = {
 		id: '',
 		password: '',
 		result:''
+	}
+
+	componentDidMount(){
+		if(this.props.auth.isAuthenticated){
+			this.props.history.push({
+				pathname: '/home'
+			});
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.auth.isAuthenticated) {
+			this.props.history.push({
+				pathname: '/home'
+			});
+		}
 	}
 
 	handleChange = (info) => {
@@ -29,11 +50,13 @@ class LoginForm extends Component{
 				console.log(response.data);
 				if(response.data.success) {
 					console.log('successful signup')
-					console.log(this.state.id);
-					this.props.history.push({
-						pathname: '/home',
-						state: {id: this.state.id}
-					});
+					const { token } = response.data;
+					localStorage.setItem("jwtToken", token);
+					setAuthToken(token);
+					const decoded = jwt_decode(token);
+					console.log(decoded.id);
+					const {AuthActions} = this.props;
+					AuthActions.setCurrentUser(decoded.id);
 				} else {
 					console.log('sign-up error');
 					console.log(response.data.result);
@@ -89,4 +112,11 @@ class LoginForm extends Component{
 		}
 	}
 
-export default LoginForm;
+export default connect(
+	(state) => ({
+		auth: state.auth
+	}),
+	(dispatch) => ({
+		AuthActions: bindActionCreators(authActions, dispatch)
+	})
+)(LoginForm);

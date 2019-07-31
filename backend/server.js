@@ -14,9 +14,6 @@ const jwt = require("jsonwebtoken");
 const keys = require("./config/keys");
 const passport = require("passport");
 
-app.use(passport.initialize());
-require("./validation/passport")(passport);
-
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -26,6 +23,10 @@ const client = new MongoClient(db, {useNewUrlParser:true});
 client.connect(err=> {
     console.log("MongoDB connected.")
 });
+
+app.use(passport.initialize());
+require("./validation/passport")(passport);
+
 
 app.use(logger('dev'));
 

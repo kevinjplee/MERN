@@ -2,11 +2,18 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import App from 'shared/App';
+import {Provider} from 'react-redux';
 
-const Root = () => (
-	<BrowserRouter>
-		<App/>
-	</BrowserRouter>
-);
+import store from 'store';
+
+const Root = () => {
+	return(
+		<Provider store = {store}>
+			<BrowserRouter>
+				<App/>
+			</BrowserRouter>
+		</Provider>
+)
+	};
 
 export default Root;

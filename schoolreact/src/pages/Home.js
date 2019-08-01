@@ -25,7 +25,7 @@ class Home extends Component{
 		
 		return(
 			<React.Fragment>
-				<GradeFormList id = {this.state.id}></GradeFormList>
+				<GradeFormList></GradeFormList>
 				{/*<ChatForm id = {this.state.id}></ChatForm>*/}
 				<Submit onClick = {this.handleLogout} fullWidth variant = "contained">
 				로그아웃</Submit>

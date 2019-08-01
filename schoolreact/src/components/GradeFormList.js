@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {HomeWrapper} from 'components'
 import axios from 'axios'
 import MaterialTable from 'material-table'
-class GradeFormList extends Component {
+import {connect} from 'react-redux';
 
-    
+class GradeFormList extends Component {
     SelectId = 0;
     state = {
         id: this.props.id,
@@ -21,7 +21,7 @@ class GradeFormList extends Component {
         this.setState({
             data: []
         })
-        console.log(this.state.id);
+        console.log(this.props.id);
         axios.get('/gradedata', {
             params: {id: this.props.id}
         })
@@ -112,4 +112,8 @@ class GradeFormList extends Component {
     }
 }
 
-export default GradeFormList;
+export default connect(
+  (state) => ({
+    id: state.auth.user.id
+  })
+)(GradeFormList);
